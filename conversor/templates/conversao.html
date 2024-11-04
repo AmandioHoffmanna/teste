@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Moedas</title>
+    <link rel="stylesheet" href="{% static 'conversor_moedas/style.css' %}">
+
+</head>
+
+<body>
+    <h1>Conversor de Moedas</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="valor">Valor a Converter:</label>
+        <input type="text" id="valor" name="valor" required>
+        <br>
+        <br>
+        <label for="moeda_origem">Moeda de Origem:</label>
+        <select id="moeda_origem" name="moeda_origem" required>
+            <option value="BRL">Real (BRL)</option>
+            <option value="USD">Dólar (USD)</option>
+            <option value="EUR">Euro (EUR)</option>
+            <!-- Adicione mais opções de moeda conforme necessário -->
+        </select>
+        <br>
+        <br>
+        <label for="moeda_destino">Moeda de Destino:</label>
+        <select id="moeda_destino" name="moeda_destino" required>
+            <option value="BRL">Real (BRL)</option>
+            <option value="USD">Dólar (USD)</option>
+            <option value="EUR">Euro (EUR)</option>
+            <!-- Adicione mais opções de moeda conforme necessário -->
+        </select>
+        <br>
+        <br>
+        <label for="taxa_cambio">Taxa de Câmbio:</label>
+        <input type="text" id="taxa_cambio" name="taxa_cambio" required>
+
+        <button type="submit">Converter</button>
+    </form>
+
+    {% if error %}
+    <p style="color: red;">{{ error }}</p>
+    {% endif %}
+    {% if resultado is not None %}
+    <h2>Resultado: {{ resultado }}</h2>
+    {% endif %}
+</body>
+
+</html>
